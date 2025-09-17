@@ -52,11 +52,11 @@ const App = () => {
     setTasks(novaLista);
   }
 
-  function onAddTaskSubmit(title, description) {
+  function onAddTaskSubmit(nome, descricao) {
     const newTask = {
       id: v4(),
-      title,
-      description,
+      nome,
+      descricao,
       isCompleted: false
     };
     setTasks([...tasks, newTask]);

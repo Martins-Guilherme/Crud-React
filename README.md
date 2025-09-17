@@ -1,6 +1,6 @@
-# React + Vite
+#### React + Vite
 
-#### Gerenciador de Tarefas
+# Gerenciador de Tarefas
 
 Projeto de gerenciamento de tarefas desenvolvido com **React** e **Vite**, para demonstrar o uso de bibliotecas e ferramentas de desenvolvimento web modernas. A aplicação permite aos usuários criar, visualizar e remover tarefas, oferecendo uma interface de usuário interativa e reativa.
 

@@ -16,9 +16,6 @@ const router = createBrowserRouter([
     element: <TaskPage />
   }
 ]);
-// PAREI NESSE TEMPO!
-// AULÃO REACT
-// 1:22:53
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />

@@ -1,8 +1,8 @@
-import { ChevronRightIcon, TrashIcon } from "lucide-react";
+import { Check, ChevronRightIcon, Pencil, TrashIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
-const Tasks = ({ tasks, onTaskClick, onDeletTaskClick }) => {
+const Tasks = ({ tasks, onTaskClick, onDeletTaskClick, ...rest }) => {
   const navigate = useNavigate();
 
   function onSeeDetailsClick(task) {
@@ -10,6 +10,14 @@ const Tasks = ({ tasks, onTaskClick, onDeletTaskClick }) => {
     query.set("nome", task.nome);
     query.set("descricao", task.descricao);
     navigate(`/task?${query.toString()}`);
+  }
+
+  function onEditTaskClick(task) {
+    const query = new URLSearchParams();
+    query.set("nome", task.nome);
+    query.set("id", task.id);
+    query.set("descricao", task.descricao);
+    navigate(`/task/edit?${query.toString()}`);
   }
 
   return (
@@ -20,11 +28,19 @@ const Tasks = ({ tasks, onTaskClick, onDeletTaskClick }) => {
             onClick={() => {
               onTaskClick(task.id);
             }}
-            className={`bg-slate-400 text-left text-white p-2 rounded-md w-full
+            className={`bg-slate-400 text-left text-white flex p-2 rounded-md justify-between w-full
             ${task.isCompleted && "line-through"}`}
           >
             {task.nome}
+            {task.isCompleted && (
+              <p className="text-green-700">
+                <Check />
+              </p>
+            )}
           </button>
+          <Button onClick={() => onEditTaskClick(task)}>
+            <Pencil />
+          </Button>
           <Button
             onClick={() => {
               onSeeDetailsClick(task);

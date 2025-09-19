@@ -1,5 +1,3 @@
-import { ChangeEventHandler } from "react";
-
 const input = (props) => {
   return (
     <>

@@ -2,12 +2,16 @@ import { useState } from "react";
 import Input from "./Input";
 
 interface AddTasksProps {
-  onAddTaskSubmit: (nome: string, descricao: string) => void;
+  onAddTaskSubmit?: (nome: string, descricao: string) => void;
+  onEditTaskSubmit?: (nome: string, descricao: string) => void;
+  edit?: boolean;
+  initialTitle?: string | null;
+  initialDescription?: string | null;
 }
 
-const AddTasks = ({ onAddTaskSubmit }: AddTasksProps) => {
-  const [nome, setTitle] = useState("");
-  const [descricao, setDescription] = useState("");
+const AddTasks = ({ onAddTaskSubmit, onEditTaskSubmit, edit = false, initialTitle = "", initialDescription = "" }: AddTasksProps) => {
+  const [nome, setTitle] = useState(initialTitle || "");
+  const [descricao, setDescription] = useState(initialDescription || "");
 
   return (
     <>
@@ -16,13 +20,13 @@ const AddTasks = ({ onAddTaskSubmit }: AddTasksProps) => {
           type="text"
           placeholder="Digite o titulo da tarefa"
           value={nome}
-          onChange={(event) => setTitle(event.target.value)}
+          onChange={(event: any) => setTitle(event.target.value)}
         />
         <Input
           type="text"
           placeholder="Digite a descrição da tarefa"
           value={descricao}
-          onChange={(event) => setDescription(event.target.value)}
+          onChange={(event: any) => setDescription(event.target.value)}
         />
         <button
           onClick={() => {
@@ -32,13 +36,17 @@ const AddTasks = ({ onAddTaskSubmit }: AddTasksProps) => {
               setDescription("");
               return alert("Preencha o título e a descrição da tarefa;.");
             }
-            onAddTaskSubmit(nome, descricao);
+            if (edit && onEditTaskSubmit) {
+              onEditTaskSubmit(nome, descricao);
+            } else if (onAddTaskSubmit) {
+              onAddTaskSubmit(nome, descricao);
+            }
             setTitle("");
             setDescription("");
           }}
           className="bg-slate-500 text-white px-4 py-2 rounded-md font-medium"
         >
-          Adicionar
+          {!edit ? "Adicionar" : "Renomear"}
         </button>
       </div>
     </>

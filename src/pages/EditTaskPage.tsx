@@ -16,8 +16,6 @@ const EditTaskPage = () => {
   const id = searchParams.get("id");
 
   const handleEditSubmit = (nome: string, descricao: string) => {
-    // onEditTaskSubmit(id, nome, descricao);
-    console.log("Editando tarefa:", { id, nome, descricao });
     navigate("/"); // Navegar de volta após a edição
     if (id) {
       onEditTaskSubmit(id, nome, descricao);
